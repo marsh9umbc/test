@@ -83,12 +83,29 @@ long create_mbox_421(unsigned long id, int crypt_alg)
 //system call shall return an appropriate error and not remove the mailbox.
 long remove_mbox_421(unsigned long id)
 {
+    struct list_head* pos = NULL;
+    struct list_head* tmp;
 
+    list_for_each_safe(pos, tmp, &list_mbox) {
+        mbox_t* p = list_entry(pos, mbox_t, list_node);
+
+        if (p->id == id) {
+            /*
+                ALWAYS delete the item from the list first, then free it.
+                Not the other way around.
+            */
+            list_del(pos);
+            // kfree(p)
+            free(p);
+        }
+    }
 }
 
+//search()
+//returns boolean if the node is in there
+
 int main() {
-    //initialize a mailbox.
-    //encrypt mail.
+    printf("Hello World/n");
 
     return 0;
 }
