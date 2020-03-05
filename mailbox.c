@@ -87,7 +87,8 @@ long remove_mbox_421(unsigned long id)
 }
 
 int main() {
-    printf("Hello World/n");
+    //initialize a mailbox.
+    //encrypt mail.
 
     return 0;
 }
